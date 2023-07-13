@@ -7,7 +7,7 @@ export const renderIncomesList = () => {
   incomesList.innerHTML = "";
 
   for (let income of incomes) {
-    const listElement = document.createElement("li"); // -tworzy Element Listy wraz z: name, value, editButton, removeButton
+    const listElement = document.createElement("li");
     listElement.classList.add("list-income-item");
     listElement.id = income.id;
 
@@ -15,12 +15,16 @@ export const renderIncomesList = () => {
     listElementWrapper.classList.add("income-list-element-wrapper");
 
     const name = document.createElement("p");
+    name.classList.add("element-data");
     name.innerText = income.name;
+    name.id = `income-item-name-${income.id}`;
 
     const value = document.createElement("p");
+    value.classList.add("element-data");
     value.innerText = income.value;
+    value.id = `income-item-value-${income.id}`;
 
-    const buttonsWrapper = document.createElement("div"); // tworzy Wrapper dla obu przycisków (jakby Container)
+    const buttonsWrapper = document.createElement("div");
     buttonsWrapper.classList.add("buttons-wrapper");
 
     const editButton = document.createElement("button");
@@ -33,7 +37,7 @@ export const renderIncomesList = () => {
 
     buttonsWrapper.appendChild(editButton);
     buttonsWrapper.appendChild(removeButton);
-    incomesList.appendChild(listElement); // -do listyPrzychodów (ul w HTML) wrzucamy elementListy stworzony w jsf
+    incomesList.appendChild(listElement);
 
     listElementWrapper.appendChild(name);
     listElementWrapper.appendChild(value);
@@ -56,19 +60,36 @@ const renderUpdateInputs = (e) => {
   if (document.getElementById(`update-${id}`)) {
     return false;
   }
+  const currentName = document.getElementById(
+    `income-item-name-${id}`
+  ).textContent;
 
-  const updateInputsWrapper = document.createElement("div");
+  const currentValue = document.getElementById(
+    `income-item-value-${id}`
+  ).textContent;
+
+  const updateInputsWrapper = document.createElement("form");
+  updateInputsWrapper.classList.add("update-inputs-wrapper");
   updateInputsWrapper.id = `update-${id}`;
 
   const nameInput = document.createElement("input");
+  nameInput.classList.add("element-data-input-update");
   nameInput.id = `update-name-${id}`;
+  nameInput.required = true;
+  nameInput.value = currentName;
 
   const incomeInput = document.createElement("input");
+  incomeInput.classList.add("element-data-input-update");
   incomeInput.type = "number";
   incomeInput.id = `update-income-${id}`;
+  incomeInput.required = true;
+  incomeInput.min = "0.01";
+  incomeInput.step = "0.01";
+  incomeInput.value = currentValue;
 
   const saveButton = document.createElement("button");
   saveButton.innerText = "ZAPISZ";
+  saveButton.type = "submit";
   saveButton.id = `update-save-${id}`;
 
   const cancelButton = document.createElement("button");
@@ -82,7 +103,7 @@ const renderUpdateInputs = (e) => {
 
   listElement.appendChild(updateInputsWrapper);
 
-  saveButton.addEventListener("click", editIncomesList);
+  updateInputsWrapper.addEventListener("submit", editIncomesList);
   cancelButton.addEventListener("click", cancelEditInputs);
 };
 
@@ -93,7 +114,6 @@ const cancelEditInputs = (e) => {
   const listElement = document.getElementById(id);
   const updateElement = document.getElementById(`update-${id}`);
   listElement.removeChild(updateElement);
-  console.log(id);
 };
 
 const calculateIncomesSum = () => {

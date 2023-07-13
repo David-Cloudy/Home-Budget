@@ -14,7 +14,7 @@ export const addIncome = (e) => {
     id: Math.random().toString(),
   };
 
-  incomes.push(_income); // -najpierw dane dodaje do tablicy
+  incomes.push(_income); // - dodaje dane do tablicy
 
   renderIncomesList(); // -renderuje tablicę
 
@@ -26,7 +26,7 @@ export const addIncome = (e) => {
 export const editIncomesList = (e) => {
   e.preventDefault();
 
-  const idToEdit = e.target.id.split("-")[2];
+  const idToEdit = e.target.id.split("-")[1];
   const nameValue = document.getElementById(`update-name-${idToEdit}`).value;
   const incomeValue = document.getElementById(
     `update-income-${idToEdit}`
@@ -51,9 +51,9 @@ export const editIncomesList = (e) => {
 export const deleteIncome = (e) => {
   e.preventDefault();
 
-  const idToDelete = e.target.id; //- jest to oznaczenie elementu, ktory mamy skasować identyfikując go po id
+  const idToDelete = e.target.id;
 
-  incomes = incomes.filter((el) => el.id !== idToDelete); // -filtruje tablicę, pozbywając się elementów z id do skasowania
+  incomes = incomes.filter((el) => el.id !== idToDelete);
 
   renderIncomesList();
 };

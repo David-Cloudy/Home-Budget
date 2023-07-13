@@ -24,11 +24,25 @@
     <main class="app-main">
       <div class="incomes-wrapper">
         <h3 class="incomes-heading">PRZYCHODY:</h3>
-        <div class="incomes-container">
-          <input id="income-name" type="text" maxlength="49" size="45" />
-          <input id="income-value" type="number" />
+        <form class="form-add" id="income-form">
+          <input
+            class="input-add"
+            id="income-name"
+            type="text"
+            maxlength="49"
+            size="45"
+            required
+          />
+          <input
+            class="input-add"
+            id="income-value"
+            type="number"
+            min="0.01"
+            step="0.01"
+            required
+          />
           <button id="add-income-button">DODAJ</button>
-        </div>
+        </form>
         <ul class="incomes-list" id="incomes-list"></ul>
 
         <p class="sum-of-incomes">
@@ -38,17 +52,30 @@
 
       <div class="outcomes-wrapper">
         <h3 class="outcomes-heading">WYDATKI:</h3>
-        <div class="outcomes-container">
-          <input id="outcome-name" type="text" maxlength="45" size="45" />
-          <input id="outcome-value" type="number" />
+        <form class="form-add" id="outcome-form">
+          <input
+            class="input-add"
+            id="outcome-name"
+            type="text"
+            maxlength="45"
+            size="45"
+            required
+          />
+          <input
+            class="input-add"
+            id="outcome-value"
+            type="number"
+            min="0.01"
+            step="0.01"
+            required
+          />
           <button id="add-outcome-button">DODAJ</button>
-        </div>
+        </form>
         <ul class="outcomes-list" id="outcomes-list"></ul>
-        <div>
-          <p class="sum-of-outcomes">
-            Suma wydatków: <span id="outcomes-sum">0</span> zł
-          </p>
-        </div>
+
+        <p class="sum-of-outcomes">
+          Suma wydatków: <span id="outcomes-sum">0</span> zł
+        </p>
       </div>
     </main>
 

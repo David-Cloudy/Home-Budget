@@ -7,7 +7,7 @@ export const renderOutcomesList = () => {
   outcomesList.innerHTML = "";
 
   for (let outcome of outcomes) {
-    const listElement = document.createElement("li"); // -tworzy Element Listy wraz z: name, value, editButton, removeButton
+    const listElement = document.createElement("li");
     listElement.classList.add("list-outcome-item");
     listElement.id = outcome.id;
 
@@ -15,12 +15,16 @@ export const renderOutcomesList = () => {
     listElementWrapper.classList.add("outcome-list-element-wrapper");
 
     const name = document.createElement("p");
+    name.classList.add("element-data");
     name.innerText = outcome.name;
+    name.id = `outcome-item-name-${outcome.id}`;
 
     const value = document.createElement("p");
+    value.classList.add("element-data");
     value.innerText = outcome.value;
+    value.id = `outcome-item-value-${outcome.id}`;
 
-    const buttonsWrapper = document.createElement("div"); // tworzy Wrapper dla obu przycisków (jakby Container)
+    const buttonsWrapper = document.createElement("div");
     buttonsWrapper.classList.add("buttons-wrapper");
 
     const editButton = document.createElement("button");
@@ -33,7 +37,7 @@ export const renderOutcomesList = () => {
 
     buttonsWrapper.appendChild(editButton);
     buttonsWrapper.appendChild(removeButton);
-    outcomesList.appendChild(listElement); // -do listyWydatkówów (ul w HTML) wrzucamy elementListy stworzony w js
+    outcomesList.appendChild(listElement);
 
     listElementWrapper.appendChild(name);
     listElementWrapper.appendChild(value);
@@ -56,20 +60,37 @@ const renderUpdateInputs = (e) => {
   if (document.getElementById(`update-${id}`)) {
     return false;
   }
+  const currentName = document.getElementById(
+    `outcome-item-name-${id}`
+  ).textContent;
 
-  const updateInputsWrapper = document.createElement("div");
+  const currentValue = document.getElementById(
+    `outcome-item-value-${id}`
+  ).textContent;
+
+  const updateInputsWrapper = document.createElement("form");
+  updateInputsWrapper.classList.add("update-inputs-wrapper");
   updateInputsWrapper.id = `update-${id}`;
 
   const nameInput = document.createElement("input");
+  nameInput.classList.add("element-data-input-update");
   nameInput.id = `update-name-${id}`;
+  nameInput.required = true;
+  nameInput.value = currentName;
 
   const outcomeInput = document.createElement("input");
+  outcomeInput.classList.add("element-data-input-update");
   outcomeInput.type = "number";
   outcomeInput.id = `update-outcome-${id}`;
+  outcomeInput.required = true;
+  outcomeInput.min = "0.01";
+  outcomeInput.step = "0.01";
+  outcomeInput.value = currentValue;
 
   const saveButton = document.createElement("button");
   saveButton.innerText = "ZAPISZ";
   saveButton.id = `update-save-${id}`;
+  saveButton.type = "submit";
 
   const cancelButton = document.createElement("button");
   cancelButton.innerText = "ANULUJ";
@@ -82,7 +103,7 @@ const renderUpdateInputs = (e) => {
 
   listElement.appendChild(updateInputsWrapper);
 
-  saveButton.addEventListener("click", editOutcomesList);
+  updateInputsWrapper.addEventListener("submit", editOutcomesList);
   cancelButton.addEventListener("click", cancelEditInputs);
 };
 
@@ -93,7 +114,6 @@ const cancelEditInputs = (e) => {
   const listElement = document.getElementById(id);
   const updateElement = document.getElementById(`update-${id}`);
   listElement.removeChild(updateElement);
-  console.log(id);
 };
 
 const calculateOutcomesSum = () => {

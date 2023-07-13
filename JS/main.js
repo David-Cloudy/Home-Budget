@@ -15,13 +15,13 @@ export const outcomesSum = document.getElementById("outcomes-sum");
 
 const balanceInfoText = document.getElementById("info-text");
 
-const inputIncomeValue = document.getElementById("income-value");
+const incomeForm = document.getElementById("income-form");
 
-const addIncomeButton = document.getElementById("add-income-button");
-const addOutcomeButton = document.getElementById("add-outcome-button");
+const outcomeForm = document.getElementById("outcome-form");
 
-addIncomeButton.addEventListener("click", addIncome);
-addOutcomeButton.addEventListener("click", addOutcome);
+incomeForm.addEventListener("submit", addIncome);
+
+outcomeForm.addEventListener("submit", addOutcome);
 
 export const displayCurrentBalance = () => {
   const income = Number(incomesSum.innerText);
@@ -40,10 +40,13 @@ export const displayCurrentBalance = () => {
   }
 };
 
-document.ready(function () {
-  inputIncomeValue.keypress(function () {
-    if (inputIncomeValue.value.length == 6) {
-      return false;
-    }
-  });
-});
+export function validation() {
+  let numberFromInput = document.getElementById("income-value").value;
+  let text;
+  if (isNaN(numberFromInput) || numberFromInput < 1 || numberFromInput > 10) {
+    text = "Input not valid";
+  } else {
+    text = "Input OK";
+  }
+  document.getElementById("limit-info-text").innerHTML = text;
+}

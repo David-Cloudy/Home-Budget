@@ -14,7 +14,7 @@ export const addOutcome = (e) => {
     id: Math.random().toString(),
   };
 
-  outcomes.push(_outcome); // -najpierw dane dodaje do tablicy
+  outcomes.push(_outcome); // - dodaje dane do tablicy
 
   renderOutcomesList(); // -renderuje tablicę
 
@@ -26,7 +26,7 @@ export const addOutcome = (e) => {
 export const editOutcomesList = (e) => {
   e.preventDefault();
 
-  const idToEdit = e.target.id.split("-")[2];
+  const idToEdit = e.target.id.split("-")[1];
   const nameValue = document.getElementById(`update-name-${idToEdit}`).value;
   const outcomeValue = document.getElementById(
     `update-outcome-${idToEdit}`
@@ -51,9 +51,9 @@ export const editOutcomesList = (e) => {
 export const deleteOutcome = (e) => {
   e.preventDefault();
 
-  const idToDelete = e.target.id; //- jest to oznaczenie elementu, ktory mamy skasować identyfikując go po id
+  const idToDelete = e.target.id;
 
-  outcomes = outcomes.filter((el) => el.id !== idToDelete); // -filtruje tablicę, pozbywając się elementów z id do skasowania
+  outcomes = outcomes.filter((el) => el.id !== idToDelete);
 
   renderOutcomesList();
 };
