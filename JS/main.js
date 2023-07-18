@@ -28,25 +28,14 @@ export const displayCurrentBalance = () => {
   const outcome = Number(outcomesSum.innerText);
 
   if (income > outcome) {
-    balanceInfoText.innerText = `Możesz jeszcze wydać ${
+    balanceInfoText.innerText = `Możesz jeszcze wydać ${(
       income - outcome
-    } złotych`;
+    ).toFixed(2)} złotych`;
   } else if (outcome > income) {
-    balanceInfoText.innerText = `Bilans jest ujemny. Jesteś na minusie ${
+    balanceInfoText.innerText = `Bilans jest ujemny. Jesteś na minusie ${(
       outcome - income
-    } złotych`;
+    ).toFixed(2)} złotych`;
   } else {
     balanceInfoText.innerText = "Bilans wynosi zero";
   }
 };
-
-export function validation() {
-  let numberFromInput = document.getElementById("income-value").value;
-  let text;
-  if (isNaN(numberFromInput) || numberFromInput < 1 || numberFromInput > 10) {
-    text = "Input not valid";
-  } else {
-    text = "Input OK";
-  }
-  document.getElementById("limit-info-text").innerHTML = text;
-}

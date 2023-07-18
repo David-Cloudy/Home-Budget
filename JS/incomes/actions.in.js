@@ -8,13 +8,13 @@ export let incomes = [];
 export const addIncome = (e) => {
   e.preventDefault();
 
-  const _income = {
+  const newIncome = {
     name: incomeName.value,
     value: Number(incomeValue.value),
     id: Math.random().toString(),
   };
 
-  incomes.push(_income); // - dodaje dane do tablicy
+  incomes.push(newIncome); // - dodaje dane do tablicy
 
   renderIncomesList(); // -renderuje tablicę
 

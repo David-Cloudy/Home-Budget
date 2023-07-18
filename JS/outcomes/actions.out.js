@@ -8,13 +8,13 @@ export let outcomes = [];
 export const addOutcome = (e) => {
   e.preventDefault();
 
-  const _outcome = {
+  const newOutcome = {
     name: outcomeName.value,
     value: Number(outcomeValue.value),
     id: Math.random().toString(),
   };
 
-  outcomes.push(_outcome); // - dodaje dane do tablicy
+  outcomes.push(newOutcome); // - dodaje dane do tablicy
 
   renderOutcomesList(); // -renderuje tablicę
 

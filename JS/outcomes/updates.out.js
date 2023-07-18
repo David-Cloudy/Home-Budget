@@ -117,10 +117,10 @@ const cancelEditInputs = (e) => {
 };
 
 const calculateOutcomesSum = () => {
-  const _outcomesSum = outcomes.reduce((acc, outcome) => {
+  const newOutcomesSum = outcomes.reduce((acc, outcome) => {
     return acc + outcome.value;
   }, 0);
 
-  outcomesSum.innerText = _outcomesSum;
+  outcomesSum.innerText = newOutcomesSum;
   displayCurrentBalance();
 };

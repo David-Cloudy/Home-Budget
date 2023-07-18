@@ -117,10 +117,10 @@ const cancelEditInputs = (e) => {
 };
 
 const calculateIncomesSum = () => {
-  const _incomesSum = incomes.reduce((acc, income) => {
+  const newIncomesSum = incomes.reduce((acc, income) => {
     return acc + income.value;
   }, 0);
 
-  incomesSum.innerText = _incomesSum;
+  incomesSum.innerText = newIncomesSum;
   displayCurrentBalance();
 };
